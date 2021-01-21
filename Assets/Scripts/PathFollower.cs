@@ -31,6 +31,20 @@ public class PathFollower : MonoBehaviour
     private void FixedUpdate()
     {
         if(!reachedEnd) MoveToNextNode();
+
+        controller.distanceToEnd = CalculateDistanceToEnd();
+    }
+
+    float CalculateDistanceToEnd()
+    {
+        float distance = 0;
+        for(int i = Path.instance.path.IndexOf(nextNode); i < Path.instance.path.Count; i++)
+        {
+            distance += Path.instance.path[i].GetComponent<Node>().distanceToNextNode;
+        }
+        Vector3 relative = nextNode.transform.position - transform.position;
+        distance += relative.magnitude;
+        return distance;
     }
 
     void MoveToNextNode()

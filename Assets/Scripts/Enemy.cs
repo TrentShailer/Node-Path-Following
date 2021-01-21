@@ -8,6 +8,8 @@ public abstract class Enemy : MonoBehaviour
     public float health;
     public float damage;
 
+    public float distanceToEnd = 0f;
+
     public virtual void OnDeath() { }
 
     public void DoDamage()

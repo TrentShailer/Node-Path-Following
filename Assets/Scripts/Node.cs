@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-
-    private void OnDrawGizmos()
+	public float distanceToNextNode = 0f;
+	private void Start()
+	{
+		Path path = Path.instance;
+		int index = path.path.IndexOf(gameObject);
+		if (path.path[path.path.Count - 1] != gameObject)
+		{
+			GameObject nextNode = path.path[index + 1];
+			Vector3 relative = nextNode.transform.position - transform.position;
+			distanceToNextNode = relative.magnitude;
+		}
+	}
+	private void OnDrawGizmos()
     {
 		Gizmos.color = new Color(0, 1, 0, 0.5f);
 
